@@ -1,0 +1,19 @@
+server:
+  port: 8006
+
+spring:
+  application:
+    name: consul-provider-payment
+
+  cloud:
+    consul:
+      enabled: true
+      host: 192.168.22.3
+      port: 8500
+      discovery:
+        enabled: true
+        # hostname: 127.0.0.1
+        service-name: ${spring.application.name}
+        # docker 部署 consul 需要配置ip地址为linux系统ip地址
+        hostname: 192.168.22.3
+        prefer-ip-address: true #设置为true以IP地址注册到服务中心

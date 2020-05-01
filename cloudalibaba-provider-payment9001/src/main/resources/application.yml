@@ -1,0 +1,18 @@
+server:
+  port: 9001
+
+# 应用程序名称与nacos注册中心地址
+spring:
+  application:
+    name: nacos-payment-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.22.3:8848    #  配置Nacos地址
+
+# 暴露端口
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

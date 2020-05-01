@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.springcloud.dao.PaymentDao">
+
+    <!--// 增
+        useGeneratedKeys="true"
+            对于支持自动生成记录主键的数据库，如：MySQL，SQL Server，此时设置useGeneratedKeys参数值为true，
+            在执行添加记录之后可以获取到数据库自动生成的主键ID;
+        keyProperty="id"
+            id 为 键属性。
+        public int create(Payment payment);
+    -->
+    <insert id="create" parameterType="Payment" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO payment(serial) VALUES(#{serial});
+    </insert>
+
+    <!--
+        基本映射 ：（resultType）使用resultType进行输出映射，只有查询出来的列名和pojo中的属性名一致，该列才可以映射成功。
+            （数据库，实体，查询字段,这些全部都得一一对应）
+        高级映射 ：（resultMap） 如果查询出来的列名和pojo的属性名不一致，通过定义一个resultMap对列名和pojo属性名之间作一个映射关系。
+            （高级映射，字段名称可以不一致，通过映射来实现；
+        resultType和resultMap功能类似 ，都是返回对象信息 ，但是resultMap要更强大一些 ，可自定义。
+            因为resultMap要配置一下，表和类的一一对应关系，所以说就算你的字段名和你的实体类的属性名不一样也没关系，都会给你映射出来，
+            但是，resultType就比较鸡肋了，必须字段名一样，比如说 cId和c_id 这种的都不能映射 。
+    -->
+    <resultMap id="BaseResultMap" type="com.atguigu.springcloud.entities.Payment">
+        <id column="id" property="id" jdbcType="BIGINT"/><!-- Payment实体类中的字段id映射到数据库中字段id。 -->
+        <id column="serial" property="serial" jdbcType="VARCHAR"/><!-- Payment实体类中的字段id映射到数据库中字段id。 -->
+    </resultMap>
+
+    <!-- // 查
+        public Payment getPaymentById(@Param("id") Long id);
+    -->
+    <select id="getPaymentById" parameterType="Long" resultMap="BaseResultMap">
+        SELECT id,serial FROM payment WHERE id = #{id};
+    </select>
+
+</mapper>

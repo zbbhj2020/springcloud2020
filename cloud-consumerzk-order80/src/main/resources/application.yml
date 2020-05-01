@@ -1,0 +1,10 @@
+# 服务器端口号
+server:
+  port: 80
+
+spring:
+  application:
+    name: cloud-consumer-order # spring应用程序名称（服务名称）
+  cloud:
+    zookeeper:
+      connect-string: 192.168.22.3:2181
