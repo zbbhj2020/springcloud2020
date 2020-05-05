@@ -1,2 +1,2 @@
 # springcloud2020
-learny to use SpringCloud
+learn to use SpringCloud
